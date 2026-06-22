@@ -1,6 +1,6 @@
-# Portfolio des SAÉ – BUT R&T Cybersécurité
+# Portfolio des SAÉ - BUT R&T Cybersécurité
 
-Ce répertoire regroupe mes preuves et justifications pour les **SAÉ** (Situations d'Apprentissage et d'Évaluation) du programme national **PN-BUT-RT 2022 – Annexe 22** (BUT R&T – Parcours Cybersécurité).
+Ce répertoire regroupe mes preuves et justifications pour les **SAÉ** (Situations d'Apprentissage et d'Évaluation) du programme national **PN-BUT-RT 2022 - Annexe 22** (BUT R&T - Parcours Cybersécurité).
 
 Il est conçu pour :
 
@@ -16,12 +16,12 @@ Il est conçu pour :
 
 ## SAÉ et projets associés
 
-| SAÉ            | Titre officiel (PN 2022)                              | Projets principaux liés                                                                                    | Ressources mobilisées (exemples)                                     |
-| -------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| SAÉ 3.01       | Mettre en œuvre un système de transmission            | -                                                                                                          | R3.05 (Chaînes de transmissions numériques), R3.06 (Fibres optiques) |
-| SAÉ 3.02       | Développer des applications communicantes             | [WakeJS](https://github.com/cristianmeyers/wakejs), [Wiki.js](https://github.com/cristianmeyers/)          | R3.08, R3.09, R3.10, R4.05                                           |
-| SAÉ 3.Cyber.03 | Concevoir un réseau informatique sécurisé multi-sites | [cyberenv](https://github.com/cristianmeyers/cyberenv)                                                     | R3.01, R4.Cyber.09, R4.01, R3.04, R4.05                              |
-| SAÉ 3.Cyber.04 | Découvrir le pentesting                               | [cyberenv](https://github.com/cristianmeyers/cyberenv)                                                     | R3.Cyber.16, R4.Cyber.11                                             |
-| SAÉ 4.Cyber.01 | Sécuriser un système d'information                    | [cyberenv](https://github.com/cristianmeyers/cyberenv), [enigma](https://github.com/cristianmeyers/enigma) | R4.01, R4.Cyber.11, R4.05, R3.Cyber.16                               |
+| SAÉ            | Titre officiel (PN 2022)                              | Projets principaux liés                                                                | Ressources mobilisées (exemples)        |
+| -------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------- |
+| SAÉ 3.01       | Mettre en œuvre un système de transmission            | Liaison WiFi point-à-point (Freebox / routeur OpenWrt en mode client)                  | R3.01, R3.02, R4.Cyber.09               |
+| SAÉ 3.02       | Développer des applications communicantes             | [WakeJS](https://github.com/cristianmeyers/wakejs)                                     | R3.08, R3.09, R3.10, R4.05              |
+| SAÉ 3.Cyber.03 | Concevoir un réseau informatique sécurisé multi-sites | [cyberenv](https://github.com/cristianmeyers/cyberenv)                                 | R3.01, R4.Cyber.09, R4.01, R3.04, R4.05 |
+| SAÉ 3.Cyber.04 | Découvrir le pentesting                               | [RootMe](https://www.root-me.org/), [enigma](https://github.com/cristianmeyers/enigma) | R3.Cyber.16, R4.Cyber.11                |
+| SAÉ 4.Cyber.01 | Sécuriser un système d'information                    | [cyberenv](https://github.com/cristianmeyers/cyberenv)                                 | R4.01, R4.Cyber.11, R4.05, R3.Cyber.16  |
 
-> **Note :** Les liens mènent directement aux dépôts GitHub contenant les projets avec leurs README détaillés.
+> **Note :** Les liens mènent directement aux dépôts GitHub ou plateformes contenant les projets avec leurs preuves détaillées.
