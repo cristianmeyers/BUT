@@ -1,90 +1,81 @@
-# SAÉ 3.02 - Développer des applications communicantes
+# SAÉ 3.Cyber.03 - Concevoir un réseau informatique sécurisé multi-sites
 
-Ces projets répondent aux exigences de la **SAÉ 3.02** en combinant l'administration réseau, le déploiement de services et le développement d'outils logiciels pour les R&T.
-Les détails techniques complets, les codes sources et les procédures d'installation sont disponibles sur les dépôts dédiés.
+Ce projet répond aux exigences de la **SAÉ 3.Cyber.03** (Concevoir un réseau informatique sécurisé multi-sites) du programme national **PN-BUT-RT 2022 Annexe 22** et contribue fortement aux SAÉ complémentaires **3.Cyber.04** (Découvrir le pentesting) et **4.Cyber.01** (Sécuriser un système d'information).
 
 ## Projets
 
-- **[WakeJS](https://github.com/cristianmeyers/wakejs)** – Gestion centralisée du Wake-on-LAN
-- **[Wiki.js](https://github.com/cristianmeyers/)** – Déploiement d’un wiki collaboratif
+- **[cyberenv](https://github.com/cristianmeyers/cyberenv)** - Lab d'apprentissage de cybersécurité
 
-> **NOTE :** Cliquez sur les noms des projets pour accéder aux dépôts.
+> **NOTE IMPORTANTE** : Projet strictement pédagogique, isolé et contrôlé - utilisation réservée à la formation en cybersécurité. Respect total du RGPD (données anonymisées/minimisées), recommandations ANSSI (CyberEdu, hygiène informatique, cloisonnement), et principes ISO 27001 (analyse de risques, traçabilité, sensibilisation, charte éthique). Aucun accès externe, aucune exploitation réelle.
 
----
+### 🎯 Contexte et objectifs
 
-# WakeJS (Gestion centralisée du Wake-on-LAN)
+Développé dans le cadre du **BTS SIO SISR** (alternance) et en préparation du **BUT R&T parcours Cybersécurité**, **cyberenv** est un laboratoire pédagogique dédié à la conception d'une infrastructure réseau sécurisée et multi-sites.
 
-### 🎯 Contexte du Projet
+Je simule une infrastructure d'entreprise répartie sur deux sites distincts, reliés de façon sécurisée, avec :
 
-Développé au sein de l'**IUT de Brest Morlaix**, ce projet répond à une problématique d'administration système et réseau : optimiser et centraliser l'allumage et l'extinction du parc informatique réparti sur plusieurs bâtiments et **VLANs**.
+- Postes attaquants (Kali) et machines cibles vulnérables intentionnellement, pour valider l'étanchéité de la segmentation
+- Services réels (GLPI, OPSI, Active Directory, DHCP, NAS...)
+- Une interconnexion sécurisée entre les deux sites via **VPN Tailscale**
 
-**WakeJS** a été conçu pour :
+**Objectifs alignés PN-BUT-RT** :
 
-- **Centraliser** le réveil (Wake-on-LAN) et le monitoring d'état des salles via **ICMP**.
-- **Automatiser** la consultation des postes en temps réel en analysant (**parsing**) directement le fichier de configuration du serveur **ISC DHCP**.
-- **Segmenter** les actions par départements et salles pour répondre aux besoins des techniciens de proximité.
+- Concevoir et déployer une architecture réseau multi-sites cloisonnée et sécurisée.
+- Interconnecter deux sites Proxmox distincts via un VPN mesh (Tailscale) sans exposer les services en accès public.
+- Automatiser déploiement, isolation réseau, sauvegardes et réinitialisation pour reproductibilité/sécurité.
+- Sensibiliser à l'hygiène informatique et aux risques (charte + règles d'usage).
 
-### 📂 Ressources
+Ce lab a été **validé par mon formateur** et sera validé par **le rectorat** pour l'utilisation pédagogique en salle informatique (préparation examen BTS).
 
-- **[R3.08 – Consolidation de la programmation](../../Ressources/R3.08%20-%20Consolidation%20de%20la%20programmation/README.md)**
-- **[R3.09 – Programmation événementielle](../../Ressources/R3.09%20-%20Programmation%20%C3%A9v%C3%A9nementielle/README.md)**
-- **[R3.10 – Systèmes de gestion de bases de données](../../Ressources/R3.10%20-%20Syst%C3%A8mes%20de%20gestion%20de%20bases%20de%20donn%C3%A9es/README.md)**
-- **[R4.05 – Automatisation des tâches d'administration](../../Ressources/R4.05%20-%20Automatisation%20des%20t%C3%A2ches%20d'administration/README.md)**
+### 📂 Infrastructure et services
 
-### 🔗 Justification par rapport au Référentiel
+- **Hyperviseur / Virtualisation** : Proxmox (VMs, clones, snapshots, haute disponibilité) déployé sur **deux sites distincts**
+- **Interconnexion multi-sites** : VPN mesh **Tailscale** (WireGuard) entre les deux sites Proxmox, sans exposition de ports publics
+- **Réseau & Isolation** : VLANs, trunk ports (802.1Q), NAT, firewalls, points d'accès WiFi sécurisés (WPA3, isolation SSID/guest)
+- **Services & Annuaires** : Active Directory (authentification centralisée), ISC DHCP (adresses VLAN-isolées), GLPI (inventaire/tickets), OPSI (déploiement massifs)
+- **Stockage** : NAS sécurisé (accès restreint, backups isolés)
+- **Supervision / Sécurité** : IPS/IDS (détection anomalies logs/outils), journalisation centralisée, hardening services
 
-| Composante du Référentiel           | Justification                                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **AC23.03 : Protocole réseau**      | Utilisation du protocole **UDP** (Port 9) pour l'envoi de Magic Packets et **ICMP** pour le monitoring. |
-| **AC23.02 : Interface Web**         | Développement d'une interface dynamique en **HTML5, CSS3 (Tailwind)** et **Vanilla JS**.                |
-| **AC23.04/05 : Gestion de données** | Analyse (**Parsing**) et extraction de données depuis un fichier de configuration **ISC DHCP**.         |
-| **Client/Serveur**                  | Architecture basée sur une **API REST Node.js (Express)** et un client web asynchrone.                  |
-| **Mots-clés : Protocoles**          | Implémentation de **HTTP**, **UDP** (WOL) et **SSH** (commandes distantes).                             |
-| **Mots-clés : Sérialisation**       | Manipulation et structuration des données au format **JSON**.                                           |
+### 📂 Ressources mobilisées (PN-BUT-RT 2022)
 
-### 🛠️ Stack Technique mobilisée
+- R4.Cyber.09 - Sécurité des réseaux LAN
+- R4.Cyber.11 - Sécurisation de services réseaux
+- R4.05 - Automatisation des tâches d'administration
+- R4.01 - Infrastructures de sécurité
+- R2.02 / R3.02 - Administration système et virtualisation
+- R3.04 / R4.04 - Services d'annuaires
+- R3.10 - Gestion de bases de données
+- SAÉ 3.Cyber.04 - Découvrir le pentesting
+- SAÉ 4.Cyber.01 - Sécuriser un système d'information
 
-- **Backend :** Node.js, Express, PM2 (Gestionnaire de process)
-- **Frontend :** HTML, Tailwind CSS, JavaScript ES6
-- **Ligne de commande :** Script Bash pour utilisation en CLI
-- **Réseau & Sécurité :** Sockets UDP, ICMP Ping, SSH, adresse broadcast selon VLAN
-- **Serveur Web :** Nginx (Reverse Proxy pour l'exposition de l'API)
+### 🔗 Justification par rapport au Référentiel (PN-BUT-RT 2022)
 
----
+| Composante du Référentiel                                     | Justification (alignée PN-BUT-RT + RGPD/ANSSI/ISO 27001)                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **SAÉ 3.Cyber.03 : Concevoir un réseau sécurisé multi-sites** | Infrastructure isolée multi-machines répartie sur **deux sites Proxmox** : interconnexion par VPN mesh Tailscale (WireGuard, chiffré, sans port public exposé), VLANs, trunk (802.1Q), NAT, firewalls, segmentation attaquants/cibles, WiFi sécurisé (WPA3/isolation SSID), prévention fuites externes (AC24.01-04Cyber). |
+| **SAÉ 3.Cyber.04 : Découvrir le pentesting**                  | Lab complet avec reconnaissance (scanners), identification vulnérabilités (GLPI/OPSI), exploitation contrôlée (Kill Chain éthique), scénarios progressifs (AC24.05Cyber, AC25.01-02Cyber). Respect RGPD (données anonymisées) et ANSSI (environnement cloisonné).                                                         |
+| **SAÉ 4.Cyber.01 : Sécuriser un SI**                          | Hardening services, journalisation, sauvegardes/réinitialisation Proxmox, NAS sécurisé, supervision IPS/IDS ; charte éthique + règles d'usage ; conformité ANSSI/RGPD/ISO 27001 (risques, durcissement).                                                                                                                  |
+| **R4.Cyber.09 : Sécurité réseaux LAN**                        | Configuration VLANs, trunk, NAT, firewall, WiFi sécurisé ; isolation stricte lab pentest ; interconnexion multi-sites chiffrée via Tailscale.                                                                                                                                                                             |
+| **R4.Cyber.11 : Sécurisation services réseaux**               | Services vulnérables contrôlés + audit/supervision ; durcissement (HTTPS/ACL/auth) ; AD pour identités centralisées.                                                                                                                                                                                                      |
+| **R4.05 : Automatisation admin**                              | Scripts Shell pour déploiement/isolation/sauvegarde/réinitialisation ; auto ISC DHCP, Proxmox, OPSI/GLPI.                                                                                                                                                                                                                 |
+| **R2.02 / R3.02 : Admin sys/virtualisation**                  | Gestion Proxmox (VMs/snapshots/HA) sur deux sites ; serveurs Linux/Windows (NAS/AD/services).                                                                                                                                                                                                                             |
+| **R3.04 / R4.04 : Services d'annuaires**                      | Active Directory (auth centralisée, GPO) ; intégration SSO-like GLPI/OPSI.                                                                                                                                                                                                                                                |
+| **R3.10 : Gestion BD**                                        | Bases GLPI (inventaire), OPSI (parc) ; sécurisation ACL MariaDB/PostgreSQL.                                                                                                                                                                                                                                               |
 
-# Wiki.js (Déploiement d’un wiki collaboratif)
+### 🛠️ Stack technique mobilisée
 
-### 🎯 Contexte du Projet
+- Langages : Shell (~80 %), RouterOS Script (~20 %)
+- Automatisation : Scripts déploiement infra, DHCP update, Proxmox auto, réinitialisation cibles, sauvegardes
+- Interconnexion multi-sites : **VPN Tailscale** (WireGuard) entre deux sites Proxmox
+- Services & annuaires : Active Directory, ISC DHCP, GLPI, OPSI
+- Réseau & isolation : VLANs, trunk, NAT, firewalls, WiFi isolé (WPA3)
+- Stockage : NAS sécurisé
+- Supervision / Sécurité : IPS/IDS, journalisation, durcissement services
+- Outils audit intégrés : Scanners, fuzzers, sniffers (configs dans Services/), NMAP, DVWA, Wireshark, SQLMAP
 
-Déployé au sein de l'**IUT de Brest Morlaix**, ce projet avait pour objectif de **moderniser la documentation interne** en migrant un wiki obsolète vers une solution plus ergonomique et collaborative.
+### 📚 Livrables pédagogiques
 
-Mon rôle a été principalement de **déployer et maintenir le service** :
-
-- Installation sur serveur Linux
-- Configuration des bases **MariaDB** et **PostgreSQL**
-- Lancement du service via **PM2**
-- Personalisation et maintenance du wiki
-
-Cette solution a été validée par le **chef du service informatique** et l’équipe, conformément aux besoins identifiés dans le **cahier des charges implicite** (sécurité, accessibilité, portabilité).
-
-### 📂 Ressources
-
-- **[R4.01 – Infrastructures de sécurité](../../Ressources/R4.01%20-%20Infrastructures%20de%20s%C3%A9curit%C3%A9/README.md)**
-- **[R4.05 – Automatisation des tâches d'administration](../../Ressources/R4.05%20-%20Automatisation%20des%20t%C3%A2ches%20d'administration/README.md)**
-
-### 🔗 Justification par rapport au Référentiel
-
-| Composante du Référentiel           | Justification                                                          |
-| ----------------------------------- | ---------------------------------------------------------------------- |
-| **AC23.04/05 : Gestion de données** | Installation et configuration des bases de données MariaDB/PostgreSQL. |
-| **Client/Serveur**                  | Déploiement d’un service Node.js accessible via une interface web.     |
-| **Mots-clés : Protocoles**          | HTTP/HTTPS via Nginx, gestion des sessions et accès sécurisés.         |
-
-### 🛠️ Stack Technique mobilisée
-
-- **Serveur Linux :** installation et configuration de Wiki.js
-- **Bases de données :** MariaDB et PostgreSQL
-- **Gestion du service :** PM2 pour Node.js, déploiement Docker
-- **Sécurité :** Nginx en reverse proxy avec SSL
-
-> Ce projet est principalement orienté **déploiement et administration de service**, et non développement de l’application.
+- Catalogue d'exercices progressifs + corrigés
+- Guides d'installation et procédures ateliers
+- Charte éthique + consignes sécurité (RGPD/ANSSI/ISO 27001)
+- Scripts d'automatisation pour reproductibilité totale
